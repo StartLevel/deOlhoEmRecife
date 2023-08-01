@@ -48,11 +48,6 @@ header {
   background: lightgray;
 }
 
-
-
-
-
-
 .placaSolar {
   top: 5px;
 }
@@ -112,7 +107,7 @@ header {
 
 .conviteFerramentas {
   width: 1518px;
-  height: 700px;
+  height: 580px;
   flex-shrink: 0;
   background: rgba(37, 77, 77, 0.2);
   margin-top: 50px;
@@ -126,7 +121,7 @@ header {
 .conviteFerramentasConteudo {
   width: 716px;
   height: 500px;
-  top: 90px;
+  top: 60px;
   margin-left: 670px;
   position: absolute;
 }
