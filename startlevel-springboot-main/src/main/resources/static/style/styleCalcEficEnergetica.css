@@ -52,10 +52,9 @@ header {
 
 .calcEficienciaEenergetica {
   background: rgb(85, 159, 17, 0.2);
-
   width: 1518px;
   margin: 0;
-  padding-bottom: 192px;
+  padding-bottom:0 px;
 }
 
 .content {
@@ -119,6 +118,21 @@ select {
 select {
   height: 50px;
   font-size: 14px;
+}
+
+input[type="number"], [type="time"] {
+	width: 150px;
+}
+
+ /* Estilo para o resultado em tempo real */
+.resultado-energia {
+	width: 25%;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 40px;
 }
 
 #btnAdicionarLinha {

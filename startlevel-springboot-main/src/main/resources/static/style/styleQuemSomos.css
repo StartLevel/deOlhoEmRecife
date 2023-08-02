@@ -57,7 +57,7 @@ header {
 
 .logo-gif {
   top: 80px;
-  left: 467px;
+  left: 650px;
 }
 
 .recuo{
@@ -103,7 +103,7 @@ p {
   width: 1518px;
   height: 410px;
   flex-shrink: 0;
-  background: rgba(37, 77, 77, 0.2);
+background: rgb(85, 159, 17, 0.2);
 }
 
 h2 {
