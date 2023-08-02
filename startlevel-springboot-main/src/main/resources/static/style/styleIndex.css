@@ -82,6 +82,10 @@ header {
   margin-left: 31px;
 }
 
+.recuo{
+  text-indent: 2em;
+}
+
 .PorQueEconomizar {
   display: inline-flex;
   padding: 2px 88px 80px 20px;
@@ -109,7 +113,7 @@ header {
   width: 1518px;
   height: 580px;
   flex-shrink: 0;
-  background: rgba(37, 77, 77, 0.2);
+  background: rgba(85, 159, 17, 0.2);
   margin-top: 50px;
 }
 
@@ -143,8 +147,8 @@ p {
 }
 
 button {
-  width: 348px;
-  height: 40px;
+  width: 300px;
+  height: 45px;
   border-radius: 10px;
   border: none;
   background: #0172cb;
@@ -156,7 +160,7 @@ button {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  padding-top: 8px;
+  padding-top: 10px;
   align-items: center;
 }
 

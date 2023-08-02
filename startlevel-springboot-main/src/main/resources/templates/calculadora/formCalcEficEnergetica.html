@@ -2,40 +2,11 @@
 <html lang="en" >
 <head>
 <title>Calculadora Ef.Energetica </title>
-<link rel="icon" href="./multimidia/logo.png">
+    <link rel="icon" href="./multimidia/DeOlho.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name=”description” content="A página é voltada para a conscientização do consumo de energia.">
 <link rel="stylesheet" href="./style/styleCalcEficEnergetica.css">
-
- <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-        
-        
-        
-
-        /* Estilo para o campo de entrada de número */
-        input[type="number"] {
-            width: 100px;
-        }
-        
-         /* Estilo para o resultado em tempo real */
-        .resultado-energia {
-			width: 25%;
-            background-color: #f1f1f1;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-            }
-    </style>
     
 </head>
 
@@ -44,7 +15,7 @@
 		<nav class="header-container">
 			<div class="header-logo">
 				<picture>
-					<img src="./multimidia/logo.png" width=100px height="50px" alt="Logo Start Level">
+       				<img src="./multimidia/Deolho.png" width=50px height="40px" alt="Logo Start Level" loading="lazy">
 				</picture>
 			</div>
 			<nav class="header-navigation">
@@ -52,17 +23,9 @@
 					<li>
 						<a href="./index2">Home</a>
 					</li>
-					<li>
-						<a href="#" id="ferramentas">Calculadoras </a>
-						<ul id="submenu">
-							<li>
-								<a href="./CalcEficEnergetica">Eficiência energética</a>
-							</li>
-							<li>
-								<a href="./CalcGastoEnergPAtivPraticada">Gasto energético por atividade praticada</a>
-							</li>
-						</ul>
-					</li>
+						<li>
+							<a href="./CalcEficEnergetica">Eficiência energética</a>
+						</li>
 					<li>
 						<a href="./quemSomos">Quem somos</a>
 					</li>
@@ -73,7 +36,7 @@
 	<section class="calcEficienciaEenergetica">
 		<div class="content">
 			<h1>Calculadora de eficiência energética </h1>
-			<p> Você já parou para pensar em como a sua casa ou empresa consome energia? Uma calculadora de eficiência
+			<p class="recuo"> Você já parou para pensar em como a sua casa ou empresa consome energia? Uma calculadora de eficiência
 				energética é uma ferramenta poderosa que permite analisar e avaliar o consumo de energia de diferentes
 				equipamentos e ambientes, fornecendo insights valiosos para otimizar o uso e reduzir desperdícios. Com
 				ela, é possível calcular o gasto energético de aparelhos, identificar oportunidades de economia e
@@ -88,7 +51,7 @@
 
 			<div class="input-fields-wrapper">
 				<fieldset>
-						<select name="equipamento" value="" class="row" autocomplete="off" autofocus required>
+						<select id="equipamento" value="" class="row" autocomplete="off" autofocus required>
 							<option disabled selected value="">Equipamento</option>
 							<option value="Ar-condicionado7milBTUs">Ar-condicionado 7.000 BTUs</option>
 							<option value="Ar-condicionado7500BTUs">Ar-condicionado 7.500 BTUs</option>
@@ -134,10 +97,10 @@
 							<option value="Ventilador">Ventilador</option>
 						</select>
 					
-						<input type="number" name="potencia" placeholder="Potencia (em W)" class="row" min="1"
+						<input type="number" name="potencia" placeholder="Potência (em W)"  class="row" min="1" 
 							autocomplete="off" required>
 				
-						<input type="time" name="horas" placeholder="Tempo utilizado (em h)" class="row">
+						<input type="time" name="horas" placeholder="Tempo utilizado (em h)" id="horas" min="0.1" max="24" class="row">
 				
 					
 						<input type="number" name="diasMes" min="1" max="31" placeholder="Nº de dias utilizados/mês"
