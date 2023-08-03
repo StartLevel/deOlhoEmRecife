@@ -57,7 +57,7 @@
 
 			<div class="input-fields-wrapper">
 				<fieldset>
-						<select name="equipamento" value="" class="row" autocomplete="off" autofocus required>
+						 <select name="equipamento" class="row" autocomplete="off" autofocus required onchange="atualizarCampoPotencia()">
 							<option disabled selected value="">Equipamento</option>
 							<option value="Ar-condicionado7milBTUs">Ar-condicionado 7.000 BTUs</option>
 							<option value="Ar-condicionado7500BTUs">Ar-condicionado 7.500 BTUs</option>
@@ -215,29 +215,35 @@
             });
         }
         
+        function calcularHoras(horas) {
+    const partes = horas.split(":");
+    const horasInt = parseInt(partes[0]);
+    const minutosInt = parseInt(partes[1]);
+    const horasDecimal = horasInt + (minutosInt / 60.0);
+    return horasDecimal;
+}
         
-          function calcularEficiencia() {
-            const form = document.getElementById("linhaContainer");
-            const fields = form.querySelectorAll(".input-fields-wrapper fieldset");
+         function calcularEficiencia() {
+    const form = document.getElementById("linhaContainer");
+    const fields = form.querySelectorAll(".input-fields-wrapper fieldset");
 
-            let totalConsumo = 0;
+    let totalConsumo = 0;
 
-            fields.forEach((fieldset) => {
-                const potencia = parseFloat(
-                    fieldset.querySelector('input[name="potencia"]').value
-                );
-                const horas = parseFloat(
-                    fieldset.querySelector('input[name="horas"]').value
-                );
-                const diasMes = parseFloat(
-                    fieldset.querySelector('input[name="diasMes"]').value
-                );
+    fields.forEach((fieldset) => {
+        const potencia = parseFloat(
+            fieldset.querySelector('input[name="potencia"]').value
+        );
+        const horasString = fieldset.querySelector('input[name="horas"]').value;
+        const horas = calcularHoras(horasString); // Call the calcularHoras method here
+        const diasMes = parseFloat(
+            fieldset.querySelector('input[name="diasMes"]').value
+        );
 
-                if (!isNaN(potencia) && !isNaN(horas) && !isNaN(diasMes)) {
-                    const consumoEquipamento = potencia * horas * diasMes;
-                    totalConsumo += consumoEquipamento;
-                }
-            });
+        if (!isNaN(potencia) && !isNaN(horas) && !isNaN(diasMes)) {
+            const consumoEquipamento = potencia * horas * diasMes;
+            totalConsumo += consumoEquipamento;
+        }
+    });
 
             const resultado = document.getElementById("resultadoEficiencia");
             resultado.textContent = `Consumo total: ${totalConsumo.toFixed(2)} Wh`;
@@ -255,6 +261,26 @@
     wrapper.removeChild(fieldset); // Remove o "fieldset" do "wrapper"
     calcularEficiencia(); // Recalcula a eficiência após a remoção do formulário
 }
+
+ function atualizarCampoPotencia() {
+        // Obtenha o valor selecionado do equipamento
+        var equipamentoSelecionado = document.getElementsByName('equipamento')[0].value;
+
+        // Mapeie os valores dos equipamentos para suas respectivas potências
+        var mapaPotenciaEquipamentos = {
+            // Adicione seus equipamentos e seus respectivos valores de potência aqui
+            'Ar-condicionado7milBTUs': 1000,
+            'Ar-condicionado7500BTUs': 1100,
+            'Ar-condicionado10milBTUs': 1300,
+            // ...e assim por diante
+        };
+
+        // Encontre o campo de potência no mesmo fieldset do equipamento selecionado
+        var campoPotencia = document.querySelector('select[name="equipamento"]').closest('fieldset').querySelector('input[name="potencia"]');
+
+        // Defina o valor do campo de potência com base no equipamento selecionado
+        campoPotencia.value = mapaPotenciaEquipamentos[equipamentoSelecionado] || '';
+    }
     </script>
 
 
