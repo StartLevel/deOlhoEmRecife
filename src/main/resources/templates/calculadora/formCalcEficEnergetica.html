@@ -141,11 +141,15 @@
 
 	<script src="./js/chart.min.js"></script>
 	<script>
+		
+		
+		
+		
         function addFields() {
             var wrapper = document.querySelector(".input-fields-wrapper");
             var newFields = `
                 <fieldset class="linhaContainer">
-						<select name="equipamento" value="" class="row" autocomplete="off" autofocus required>
+						 <select name="equipamento" class="row" autocomplete="off" autofocus required onchange="atualizarCampoPotencia()">
 							<option disabled selected value="">Equipamento</option>
 							<option value="Ar-condicionado7milBTUs">Ar-condicionado 7.000 BTUs</option>
 							<option value="Ar-condicionado7500BTUs">Ar-condicionado 7.500 BTUs</option>
@@ -213,6 +217,9 @@
             newInputFields.forEach((input) => {
                 input.addEventListener("input", calcularEficiencia);
             });
+            
+            
+            
         }
         
         function calcularHoras(horas) {
@@ -263,24 +270,34 @@
 }
 
  function atualizarCampoPotencia() {
+        // Encontre o select de equipamento dentro do mesmo fieldset do evento atual
+        const equipamentoSelect = event.target;
+        const fieldset = equipamentoSelect.closest("fieldset");
+
         // Obtenha o valor selecionado do equipamento
-        var equipamentoSelecionado = document.getElementsByName('equipamento')[0].value;
+        var equipamentoSelecionado = equipamentoSelect.value;
 
         // Mapeie os valores dos equipamentos para suas respectivas potências
         var mapaPotenciaEquipamentos = {
             // Adicione seus equipamentos e seus respectivos valores de potência aqui
-            'Ar-condicionado7milBTUs': 1000,
-            'Ar-condicionado7500BTUs': 1100,
-            'Ar-condicionado10milBTUs': 1300,
+            'Ar-condicionado7milBTUs': 900,
+            'Ar-condicionado7500BTUs': 950,
+            'Ar-condicionado10milBTUs': 1200,
             // ...e assim por diante
         };
 
         // Encontre o campo de potência no mesmo fieldset do equipamento selecionado
-        var campoPotencia = document.querySelector('select[name="equipamento"]').closest('fieldset').querySelector('input[name="potencia"]');
+        var campoPotencia = fieldset.querySelector('input[name="potencia"]');
 
         // Defina o valor do campo de potência com base no equipamento selecionado
         campoPotencia.value = mapaPotenciaEquipamentos[equipamentoSelecionado] || '';
     }
+    
+    // Adicione o evento "change" para chamar a função atualizarCampoPotencia quando o equipamento é selecionado
+    const equipamentoSelect = document.querySelector('select[name="equipamento"]');
+    equipamentoSelect.addEventListener('change', atualizarCampoPotencia);
+    
+    
     </script>
 
 

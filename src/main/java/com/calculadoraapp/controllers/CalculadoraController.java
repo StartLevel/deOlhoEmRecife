@@ -52,6 +52,8 @@ public class CalculadoraController {
 
 			double consumoMensal = (potencia * 0.001) * calcularHoras(hora) * diaMes * 0.89;
 			
+			
+			
 			consumoTotal += consumoMensal;
 
 			Calculadora2 calculadora = new Calculadora2();
@@ -61,9 +63,12 @@ public class CalculadoraController {
 			calculadora.setDiasMes(diaMes);
 			calculadora.setConsumoMensal(consumoMensal);
 
+			
 			calculadoras.add(calculadora);
 			cr2.save(calculadora);
 		}
+		
+		
 		String potenciaTotalFormatted = String.format("%.2f", potenciaTotal);
         String consumoTotalFormatted = String.format("%.2f", consumoTotal);
  

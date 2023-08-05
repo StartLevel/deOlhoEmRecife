@@ -13,6 +13,7 @@
             width: 50%;
             border-spacing: 8px; /* Espaçamento entre as células */
             left: 400px;
+            padding-top: 10px;
         }
 
         th, td {
@@ -28,6 +29,25 @@
             background-color: #f2f2f2;
         }
         
+        .thValorMensal{
+			display: flex;
+			left: 600px;
+		}
+		
+		.tdValorMensal{
+			display: flex;
+			left: 280px;
+		}
+		
+		
+		
+		.content{
+			padding-bottom: 25px;
+		}
+		
+		#myChart{
+			margin-top: 50px;
+		}
         
     </style>
     
@@ -81,7 +101,12 @@
      
     
     <div class="resultos">
-      <h2>Resultado por equipamento</h2>
+		
+	 <div class="content">
+        <h1>Calculadora de eficiência energética</h1>
+        <p>Prepare-se para se surpreender com a compilação dos resultados abaixo!</p>
+    </div>
+		
     <table id="tabelaCalculadoras">
         <thead>
             <tr>
@@ -89,7 +114,7 @@
                 <th>Potência (W)</th>
                 <th>Horas Utilizadas</th>
                 <th>Dias Utilizados/Mês</th>
-                <th>Valor diario (R$)</th>
+                <th>Valor mensal (R$)</th>
             </tr>
         </thead>
         <tbody>
@@ -99,25 +124,23 @@
                 <td th:text="${calculadora.potencia}"></td>
                 <td th:text="${calculadora.horas}"></td>
                 <td th:text="${calculadora.diasMes}"></td>
-                <td th:text="${calculadora.consumoMensal}"></td>
+                <td th:text="${#numbers.formatDecimal(calculadora.consumoMensal, 3, 'POINT', 3, 'COMMA')}"></td>
+
                 
             </tr>
         </tbody>
       
+	
+		
     </table>
     
-    <h2>Resultado de todos equipamentos juntos</h2>
+
      <table>
-        <thead>
-            <tr>
-                <th>Potência Total (W)</th>
-                <th>Valor diario Total (R$)</th>
-            </tr>
-        </thead>
+       
         <tbody>
             <tr>
-                <td th:text="${potenciaTotal}"></td>
-                <td th:text="${consumoTotal}"></td>
+                <td>Total</td>
+                <td class="tdValorMensal" th:text="${consumoTotal}"></td>
             </tr>
         </tbody>
     </table>
@@ -127,10 +150,7 @@
    
     
   <section id="tabela">
-    <div class="content">
-        <h1>Calculadora de eficiência energética</h1>
-        <p>Prepare-se para se surpreender com a compilação dos resultados abaixo!</p>
-    </div>
+   
     <div style="max-width: 800px; margin: 0 auto;">
         <canvas id="myChart"></canvas>
     </div>
