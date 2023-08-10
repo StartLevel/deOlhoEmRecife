@@ -18,11 +18,19 @@ private static final long serialVersionUID = 1L;
 	
 	private String equipamento;
 	private Double potencia;
+	private Double consumoKwh;
 	private Integer diasMes;
 	private String horas;
 	private Double consumoMensal;
 	
 	
+	
+	public Double getConsumoKwh() {
+		return consumoKwh;
+	}
+	public void setConsumoKwh(Double consumoKwh) {
+		this.consumoKwh = consumoKwh;
+	}
 	public Double getConsumoMensal() {
 		return consumoMensal;
 	}

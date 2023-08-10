@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
      <title>Seus Resultados </title>
-    <link rel="icon" href="./multimidia/logo.png">
+    <link rel="icon" href="./multimidia/DeOlho.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name=”description” content="A página é voltada para a conscientização do consumo de energia.">
     <link rel="stylesheet" href="./style/styleResultCalcEficEnergetica.css">
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 50%;
-            border-spacing: 8px; /* Espaçamento entre as células */
-            left: 400px;
-        }
+  <script src="./Chart.min.js"></script>
 
-        th, td {
-            padding: 12px; /* Espaçamento interno das células */
-            text-align: left;
-        }
-
-        thead {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        
-        
-    </style>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+   
 </head>
 <body>
-	
-	
-	
-	
 	 <header>
       <nav class="header-container">
          <div class="header-logo">
-          <picture><img src="./multimidia/logo.png" width=100px height="50px" alt="Logo Start Level">
+          <picture><img src="./multimidia/Deolho.png" width=50px height="40px" alt="Logo Start Level" loading="lazy">
           </picture>
         </div>
         <nav class="header-navigation">
           <ul>
             <li>
-              <a href="./index2">Home</a>
+              <a href="./">Home</a>
             </li>
             <li>
-              <a href="#" id="ferramentas">Calculadoras </a>
-              <ul id="submenu">
-                <li>
                   <a href="./CalcEficEnergetica">Eficiência energética</a>
                 </li>
-                <li>
-                  <a href="./CalcGastoEnergPAtivPraticada">Gasto energético por atividade praticada</a>
-                </li>
-              </ul>
-            </li>
             <li>
               <a href="./quemSomos">Quem somos</a>
             </li>
           </ul>
         </nav>
       </nav>
-     
-   
-
-      
-      
-      
-        
-
-
     </header>
     
-     
-    
-    <div class="resultos">
-      <h2>Resultado por equipamento</h2>
-    <table>
+     <section class="relatorio">
+		<div class="content" >
+			<h1>Relatório da calculadora de eficiência energética</h1>
+			      <p class="recuo" style="padding-top: 80px">Foi claramente percebido um padrão de uso excessivo de equipamentos de ar condicionado nos dados apresentados. 
+					  Essa observação levanta a questão da otimização do uso desses equipamentos para não apenas reduzir os custos energéticos, 
+					  mas também minimizar o impacto ambiental associado ao consumo excessivo de eletricidade. Aqui está uma análise mais detalhada
+					   dessa situação e dicas relevantes para abordá-la:
+				</p>
+		</div>
+		
+		<h2 style="padding-top: 0; padding-bottom: 30px;">Tabela com o custo mensal dos equipamentos: </h2>
+		
+    <div class="resultos" >
+    <table id="tabelaCalculadoras">
         <thead>
             <tr>
                 <th>Equipamento</th>
                 <th>Potência (W)</th>
-                <th>Horas Utilizadas</th>
-                <th>Dias Utilizados/Mês</th>
-                <th>Valor diario (R$)</th>
+                <th>Horas utilizadas</th>
+                <th>Dias utilizados/Mês</th>
+                <th>Consumo (kWh)</th>
+                <th>Valor mensal (R$)</th>
             </tr>
         </thead>
         <tbody>
@@ -99,57 +65,143 @@
                 <td th:text="${calculadora.potencia}"></td>
                 <td th:text="${calculadora.horas}"></td>
                 <td th:text="${calculadora.diasMes}"></td>
-                <td th:text="${calculadora.consumoMensal}"></td>
+                <td th:text="${#numbers.formatDecimal(calculadora.consumoKwh, -1, 'POINT', 3, 'COMMA')}"></td>
+ 				<td th:text="${#numbers.formatDecimal(calculadora.consumoMensal, -1, 'POINT', 3, 'COMMA')}"></td>
+                
                 
             </tr>
         </tbody>
-      
+        
+        
+     
     </table>
     
-    <h2>Resultado de todos equipamentos juntos</h2>
      <table>
-        <thead>
-            <tr>
-                <th>Potência Total (W)</th>
-                <th>Valor diario Total (R$)</th>
-            </tr>
-        </thead>
+        
+
         <tbody>
             <tr>
-                <td th:text="${potenciaTotal}"></td>
-                <td th:text="${consumoTotal}"></td>
+               <td><b>Total</b></td>
+                <td class="tdValorMensal" th:text="${consumoTotal}" style="font-weight: bolder;"></td>
             </tr>
         </tbody>
     </table>
     
-      <div style="width: 80%; margin: auto;">
-    <canvas id="meuGrafico"></canvas>
-  </div>
-    
-    <section id="tabela">
-      <div class="content">
-        <h1>Calculadora de eficiência energética </h1>
-        <p>Prepare-se para se surpreender com a compilação dos resultados abaixo!</p>
-        
-        
-      </div>
-      
-       <!-- 
-        <button id="change-chart">Change to Classic</button>
-    <br><br> -->
-    
-    <div id="chart_div" style="width: 200px; height: 400px;"></div>
+      <section id="tabela">
+		  <h2 style="padding-top: 30px; padding-bottom: 30px;">Gráfico dinâmico com o custo mensal dos equipamentos: </h2>
+    <div id="graficoDinamico">
+        <canvas id="myChart"></canvas>
+    </div>
+</section>
    
-    </section>
+    
+   <div class="content">
+	   <h3 style="padding-top: 40px; margin-left: 0">Análise do uso excessivo de ar condicionado:</h3> <br><br>
+		<p class="recuo">O uso prolongado e frequente dos equipamentos de ar condicionado, como visto nos dados fornecidos, é um dos principais 
+			contribuintes para o alto consumo de energia. Os equipamentos de ar condicionado são conhecidos por consumirem grandes quantidades de 
+			eletricidade devido à sua natureza de resfriamento, o que coloca pressão sobre a rede elétrica e contribui para a pegada de carbono. 
+			Portanto, otimizar o uso desses equipamentos é fundamental tanto para as finanças quanto para a sustentabilidade ambiental.
+			</p> <br><br>
+	
+		<h3 style="padding-top: 20px; text-align: center;">Dicas para otimizar o uso de ar condicionado:</h3> <br><br>
+		<p> 
+			<strong>1. Horário estratégico: </strong>
+		Utilize os equipamentos de ar condicionado em horários estratégicos. Nos dias mais quentes, é aconselhável ligar o ar condicionado durante 
+		as horas mais quentes do dia, quando a temperatura atinge o pico. Durante as noites mais frescas, considere desligar ou reduzir a 
+		intensidade do resfriamento. <br><br>
+			<strong> 2.	Aproveite a ventilação natural: </strong>
+		Nos momentos em que a temperatura estiver mais amena, desligue o ar condicionado e aproveite a ventilação natural. Isso ajudará a refrescar
+		 o ambiente sem a necessidade de eletricidade.<br><br>
+		 	<strong>3. Uso de cortinas e persianas:</strong>
+		Manter as cortinas ou persianas fechadas durante as horas mais quentes do dia pode bloquear a entrada direta de luz solar, reduzindo o 
+		calor interno e a necessidade de resfriamento excessivo. <br><br>
+			<strong>4. Manutenção adequada:</strong>	
+		Assegure-se de que os equipamentos de ar condicionado estejam bem mantidos. Filtros limpos e um sistema eficiente de circulação de ar 
+		garantem um desempenho melhor com menos energia. <br><br>
+			<strong>5. Zonas de refrigeração: </strong>
+		Se possível, restrinja o resfriamento a áreas específicas em uso. Isso é especialmente útil em casas grandes, onde nem todas as salas 
+		precisam ser mantidas na mesma temperatura o tempo todo.<br><br>
+			<strong>6. Isolamento térmico:</strong>
+		Melhore o isolamento térmico de sua casa ou espaço. Isso ajuda a manter a temperatura estável e reduzir a necessidade de uso contínuo do 
+		ar condicionado.<br><br>
+			<strong>7. Termostatos programáveis: </strong>
+		Considere a instalação de termostatos programáveis que ajustam automaticamente a temperatura com base em sua programação, evitando o 
+		resfriamento excessivo durante períodos não ocupados.<br><br>
+			<strong>8. Vestimenta adequada: </strong>
+		Vista roupas leves e confortáveis em dias quentes para que você possa se sentir mais confortável sem depender exclusivamente do ar 
+		condicionado.<br><br>
+			<strong>9. Educação sobre eficiência energética: </strong>
+		Eduque os ocupantes da casa ou do espaço sobre a importância de usar o ar condicionado de maneira consciente e econômica.<br><br>
+		</p>
+		
+		<p class="recuo">Em suma, a otimização do uso de equipamentos de ar condicionado é uma parte essencial da busca por maior eficiência energética. Ao 
+			adotar uma abordagem consciente e estratégica, é possível não apenas reduzir os gastos com energia, mas também contribuir para a 
+			conservação de recursos e a proteção do meio ambiente.</p><br><br>
+		
+		<h3 style="margin-left: 0; padding-top: 30px;">Impacto ambiental do uso excessivo de ar condicionado e cálculo de emissão de carbono:</h3><br><br>
+		<p class="recuo"> O uso excessivo de equipamentos de ar condicionado não apenas aumenta os custos energéticos, mas também contribui signiﬁcativamente para 
+			a emissão de carbono e o aquecimento global. A maioria da eletricidade é gerada a partir de fontes de energia que produzem emissões de 
+			gases de efeito estufa, como dióxido de carbono (CO2). O aumento da demanda de eletricidade devido ao uso intensivo de ar condicionado 
+			ampliﬁca essa emissão.
+		</p> <br><br>
+		
+		<h3 style="padding-top: 20px; text-align: center;">Recomendação da calculadora de pegada de carbono:</h3><br><br>
+		<p class="recuo">Para compreender melhor o impacto ambiental do uso de ar condicionado e calcular sua pegada de carbono pessoal ou 
+			empresarial, você pode usar a calculadora disponível no site da <a href="https://www.footprintcalculator.org/"> Global Footprint Network</a> 
+			.</p><br>
+			
+		<picture style="padding-right: 8%; padding-left: 10%">
+			 <img src="./multimidia/Ferramentas/pegadaResult1.jpg" width=500px height="400px" alt="Pegada ecologica resultado 1" loading="lazy">
+		</picture>
+		
+		<picture>
+			 <img src="./multimidia/Ferramentas/pegadaResult2.jpg"  width=500px height="400px" alt="Pegada ecologica resultado 2" loading="lazy">
+		</picture>
+		
+		<p class="recuo"><br>Esta calculadora oferece uma visão abrangente das emissões de carbono associadas ao seu estilo de vida ou operações. Ela 
+			considera diversos fatores, incluindo o consumo de energia, transporte, dieta e outros hábitos, permitindo que você avalie como suas 
+			escolhas afetam o meio ambiente. 
+			</p><br>
+			
+		<p class="recuo">Lembrando que a conscientização sobre a pegada de carbono pessoal ou organizacional é o primeiro passo para adotar medidas
+			 mais sustentáveis e reduzir o impacto ambiental. Além disso, a adoção das dicas fornecidas no relatório, como otimizar o uso de ar 
+			 condicionado, também contribuirá para a diminuição da emissão de carbono e para a proteção do meio ambiente.
+			 </p> <br>
+		</div>
+		
+	</section>
+    
+    
     <section class="EquipamentoKwhTempo">
       <h2>Confira na tabela abaixo os equipamentos que apresentam maior consumo de energia, expresso em kWh por tempo de uso, no gráfico a seguir:</h2>
       <picture class="GraficoEquipamentos">
-        <img src="./multimidia/Ferramentas/EquipamentoKwhTempo.svg" width=830px height="562px" alt="Consumo dos equipamentos em kwh por tempo de uso">
+        <img src="./multimidia/Ferramentas/EquipamentoKwhTempo.svg" width=830px height="562px" alt="Consumo dos equipamentos em kwh por tempo de 
+        uso" loading="lazy">
       </picture>
       <p class="fonte">Fonte: www.eletrobras.com</p>
     </section>
   
-    
+    <section class="calculadoraEnergiaSolar">
+		<div class="content">
+		<h3 style="padding-top: 90px; text-align: center;">Recomendação da calculadora de investimento em energia solar: </h3><br><br>
+		<p class="recuo">Se você também está interessado em adotar fontes de energia mais limpas, como a energia solar, o site da NeoSolar oferece 
+			uma ferramenta prática para calcular o investimento necessário em placas solares para atender a uma determinada quantidade de energia 
+			mensal. Acesse já o simulador solar e a calculadora fotovoltaica da
+				<a href="https://www.neosolar.com.br/simulador-solar-calculadora-fotovoltaica"> NeoSolar </a> e descubra a economia que você terá em 
+				30 anos, a estimativa de redução de CO<sub>2</sub> e qual seria o tamanho do sistema indicado para o seu tipo de consumo.
+			</p><br>
+			
+		<picture style="padding-left: 26%; ">
+			 <img src="./multimidia/Ferramentas/NeoSolar.jpg" width=800px height="550px" alt="Investimento solar" loading="lazy">
+		</picture>
+	
+		
+		<p class="recuo"><br>Ao considerar a instalação de um sistema de energia solar, você não apenas reduzirá sua pegada de carbono, mas também 
+			contribuirá para a sustentabilidade do planeta e para a transição para fontes de energia mais limpas e renováveis.
+			</p>
+			
+		</div>
+	</section>
    
     
       <footer>
@@ -161,58 +213,81 @@
     </footer>
     
     
-   <script type="text/javascript">
-  // Supondo que você tenha os dados dos equipamentos em um array chamado 'equipamentos', onde cada elemento é um objeto com as informações relevantes para cada equipamento
-  var equipamentos = [
-    {
-      equipamento: 'Equipamento 1',
-      valores: [20, 30, 40, 50, 60], // Valores para cada mês (Janeiro, Fevereiro, Março, Abril, Maio) do primeiro equipamento
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1
-    },
-    {
-      equipamento: 'Equipamento 2',
-      valores: [10, 15, 25, 35, 40], // Valores para cada mês (Janeiro, Fevereiro, Março, Abril, Maio) do segundo equipamento
-      backgroundColor: 'rgba(54, 162, 235, 0.5)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1
-    },
-    // E assim por diante...
-  ];
+  <script th:inline="javascript">
+       // Obtém a tabela pelo id
+    const tabela = document.getElementById('tabelaCalculadoras');
 
-  var data = {
-    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
-    datasets: equipamentos.map(function(equipamento) {
-      return {
-        label: equipamento.equipamento,
-        data: equipamento.valores,
-        backgroundColor: equipamento.backgroundColor,
-        borderColor: equipamento.borderColor,
-        borderWidth: equipamento.borderWidth
-      };
-    })
-  };
+    // Cria um array para armazenar os dados
+    const dataArray = [];
 
-  // Configurações do gráfico
-  var options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+    // Itera pelas linhas da tabela (ignorando o cabeçalho)
+    for (let i = 1; i < tabela.rows.length; i++) {
+        const row = tabela.rows[i];
+        
+        // Extrai os valores das células e adiciona ao array
+        const equipamento = row.cells[0].innerText;
+        const potencia = parseFloat(row.cells[1].innerText);
+        const horas = parseFloat(row.cells[2].innerText);
+        const diasMes = parseFloat(row.cells[3].innerText);
+        const consumoMensal = parseFloat(row.cells[4].innerText);
+
+        // Cria um objeto com os dados da calculadora
+        const calculadora = {
+            equipamento,
+            potencia,
+            horas,
+            diasMes,
+            consumoMensal
+        };
+
+        // Adiciona o objeto ao array
+        dataArray.push(calculadora);
     }
-  };
+    
+    
+    // Cria arrays para armazenar os nomes dos equipamentos e seus consumos mensais
+const nomesEquipamentos = [];
+const consumosMensais = [];
 
-  // Criação do gráfico
-  var ctx = document.getElementById('meuGrafico').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'bar', // Tipo de gráfico (pode ser 'line', 'bar', 'radar', 'pie', etc.)
-    data: data,
-    options: options
-  });
-</script>
+// Percorre o array dataArray
+for (const calculadora of dataArray) {
+    // Extrai o nome do equipamento e o consumo mensal e adiciona aos arrays correspondentes
+    nomesEquipamentos.push(calculadora.equipamento);
+    consumosMensais.push(calculadora.consumoMensal);
+}
+
+
+
+
+  /* Configurações do gráfico */
+        var data = {
+            labels: nomesEquipamentos,
+            datasets: [
+                {
+                    label: 'Consumo Mensal',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    data: consumosMensais
+                }
+            ]
+        };
+
+        var options = {
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        /* Renderiza o gráfico */
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    
+    
+    </script>
 
 </body>
 </html>

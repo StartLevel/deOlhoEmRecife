@@ -1,13 +1,18 @@
+body{
+	overflow-x: hidden
+	
+}
+
 * {
   margin: 0%;
   padding: 0%;
   position: relative;
   font-family: Playfair Display;
 }
-head{
+head {
   width: auto;
 }
-header {
+header { 
   display: inline-flex;
   padding: 2px 9px 10px;
   width: 1500px;
@@ -50,16 +55,23 @@ header {
   background: lightgray;
 }
 
-#tabela {
-  background: rgba(130, 10, 209, 0.5);
-  height: auto;
+.relatorio {
+  background: rgb(85, 159, 17, 0.2);
+  width: 1518px;
+  margin: 0;
+  padding-bottom: 0 px;
 }
+.resultos {
+  padding-bottom: 1px;
+}
+
 .content {
   width: 1300px;
   left: 120px;
+  padding-bottom: 70px;
 }
 
-h1{
+h1 {
   padding-top: 78px;
   font-family: Playfair Display;
   font-size: 30px;
@@ -69,41 +81,100 @@ h1{
   text-align: center;
 }
 
+.recuo {
+  text-indent: 2em;
+}
+
+#tabela {
+  background: rgb(255, 255, 255);
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  border-spacing: 8px; /* Espaçamento entre as células */
+  left: 400px;
+  padding-top: 10px;
+}
+
+th,
+td {
+  padding: 12px; /* Espaçamento interno das células */
+  text-align: left;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover:nth-child(1n + 2) {
+  background-color: #3cb371;
+  color: #fff;
+}
+
+.thValorMensal {
+  display: flex;
+  left: 600px;
+}
+
+.tdValorMensal {
+  display: flex;
+  left: 280px;
+}
+
+#myChart {
+  margin-top: 50px;
+}
+#tabela {
+  background: rgb(85, 159, 17, 0.008);
+}
+#graficoDinamico {
+  max-width: 800px;
+  height: 500px;
+  margin: 0 auto;
+}
+
 p {
-  padding-top: 40px;
-  text-align: center;
+  text-align: justify;
   font-family: Playfair Display;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-#chart_div{
+#chart_div {
   margin-top: 4%;
   margin-left: 30%;
-  padding-bottom: 2%
-  ;
+  padding-bottom: 2%;
 }
-h2 {
+h2,
+h3 {
   padding-top: 80px;
   font-family: Playfair Display;
   font-size: 20px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
-  text-align: center;
-  
+  text-align: left;
+  margin-left: 120px;
 }
 
-.EquipamentoKwhTempo{
+.EquipamentoKwhTempo {
   height: auto;
+  margin-bottom: 5%;
 }
-.GraficoEquipamentos{
- position: relative;
+.GraficoEquipamentos {
+  position: relative;
   margin-left: 20%;
   top: 26px;
 }
+
 .fonte {
   text-align: left;
   margin-left: 300px;
@@ -111,13 +182,15 @@ h2 {
   position: relative;
 }
 
-
+.calculadoraEnergiaSolar{
+	background: rgb(85, 159, 17, 0.2);
+	 width: 1518px;	
+}
 
 footer {
   width: 1518px;
   height: 30px;
   background-color: #565c61;
-  margin-top: 30px;
   bottom: 0px;
   position: relative;
 }
@@ -133,8 +206,12 @@ footer {
   color: white;
 }
 
-.github{
+.github {
   margin-top: 5px;
   margin-left: 930px;
   position: absolute;
+}
+
+.tdPotencia{
+	right: 100px;
 }
